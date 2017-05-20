@@ -20,6 +20,9 @@
    <property name="mouseTracking">
     <bool>true</bool>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(127, 119, 125);</string>
+   </property>
    <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0">
     <property name="spacing">
      <number>0</number>
@@ -37,15 +40,18 @@
      <number>0</number>
     </property>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout">
+     <layout class="QHBoxLayout" name="menu_layout">
       <property name="leftMargin">
        <number>1</number>
       </property>
       <property name="topMargin">
        <number>1</number>
       </property>
+      <property name="bottomMargin">
+       <number>2</number>
+      </property>
       <item>
-       <widget class="QPushButton" name="pushButton_4">
+       <widget class="QPushButton" name="btn_open">
         <property name="maximumSize">
          <size>
           <width>33</width>
@@ -71,12 +77,16 @@
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_3">
+       <widget class="QPushButton" name="btn_min">
         <property name="maximumSize">
          <size>
           <width>33</width>
           <height>22</height>
          </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border-image: url(:/Resources/png/minimizeHovered.png);
+</string>
         </property>
         <property name="text">
          <string/>
@@ -84,12 +94,16 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="btn_max">
         <property name="maximumSize">
          <size>
           <width>33</width>
           <height>22</height>
          </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border-image: url(:/Resources/png/maximizeHovered.png);
+</string>
         </property>
         <property name="text">
          <string/>
@@ -97,12 +111,15 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="btn_exit">
         <property name="maximumSize">
          <size>
           <width>33</width>
           <height>22</height>
          </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border-image: url(:/Resources/png/closeHovered.png);</string>
         </property>
         <property name="text">
          <string/>
@@ -112,14 +129,14 @@
      </layout>
     </item>
     <item>
-     <widget class="QOpenGLWidget" name="openGLWidget">
+     <widget class="QOpenGLWidget" name="openGL_video">
       <property name="mouseTracking">
        <bool>true</bool>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QSlider" name="horizontalSlider">
+     <widget class="QSlider" name="bar_schedule">
       <property name="styleSheet">
        <string notr="true">QSlider{background-color:rgb(0,0,0)}
 
@@ -139,7 +156,7 @@ QSlider::groove:horizontal {background:transparent;height:4px}QSlider::groove:ho
      </widget>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <layout class="QHBoxLayout" name="control_layout">
       <property name="spacing">
        <number>0</number>
       </property>
@@ -149,13 +166,19 @@ QSlider::groove:horizontal {background:transparent;height:4px}QSlider::groove:ho
       <property name="topMargin">
        <number>1</number>
       </property>
+      <property name="rightMargin">
+       <number>1</number>
+      </property>
       <item>
-       <widget class="QPushButton" name="pushButton_8">
+       <widget class="QPushButton" name="btn_play">
         <property name="maximumSize">
          <size>
           <width>30</width>
           <height>23</height>
          </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
         </property>
         <property name="text">
          <string>播放</string>
@@ -163,12 +186,15 @@ QSlider::groove:horizontal {background:transparent;height:4px}QSlider::groove:ho
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_7">
+       <widget class="QPushButton" name="btn_backward">
         <property name="maximumSize">
          <size>
           <width>30</width>
           <height>23</height>
          </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
         </property>
         <property name="text">
          <string>回退</string>
@@ -176,12 +202,15 @@ QSlider::groove:horizontal {background:transparent;height:4px}QSlider::groove:ho
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_6">
+       <widget class="QPushButton" name="btn_forward">
         <property name="maximumSize">
          <size>
           <width>30</width>
           <height>23</height>
          </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
         </property>
         <property name="text">
          <string>快进</string>
@@ -202,25 +231,38 @@ QSlider::groove:horizontal {background:transparent;height:4px}QSlider::groove:ho
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_5">
+       <widget class="QPushButton" name="btn_volume">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="maximumSize">
          <size>
           <width>23</width>
           <height>23</height>
          </size>
         </property>
+        <property name="styleSheet">
+         <string notr="true">
+</string>
+        </property>
         <property name="text">
-         <string>PushButton</string>
+         <string/>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QSlider" name="horizontalSlider_2">
+       <widget class="QSlider" name="bar_volume">
         <property name="maximumSize">
          <size>
           <width>200</width>
           <height>23</height>
          </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
         </property>
         <property name="orientation">
          <enum>Qt::Horizontal</enum>

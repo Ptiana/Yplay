@@ -2,7 +2,7 @@
 #include <QMouseEvent>
 #include <QTimerEvent>
 #include <QCursor>
-
+#include <QDebug>
 
 EnventProxy::EnventProxy(QWidget *parent)
 	: QObject((QObject*)parent)
@@ -11,10 +11,10 @@ EnventProxy::EnventProxy(QWidget *parent)
 	m_top = m_right = m_bottom = m_left = 0;
 
 	
-	m_proxyWidget->installEventFilter(this);	// 代理窗体事件
+	//m_proxyWidget->installEventFilter(this);// 代理窗体事件
 	m_mousePressed = false;
 	m_regionPressed = Unknown;
-
+	
 	m_cursorTimerId = 0;
 }
 
@@ -48,6 +48,19 @@ void EnventProxy::UpdateGeometry(int x, int y, int w, int h)
 }
 
 bool EnventProxy::eventFilter(QObject* obj, QEvent* event)
+{
+	if ("YplayClass" == obj->objectName())
+		return windFilter(obj, event);
+	else if("btn_min" == obj->objectName())
+	{
+		return minFilter(obj, event);
+	}
+
+
+
+}
+
+bool EnventProxy::windFilter(QObject * obj, QEvent * event)
 {
 	QEvent::Type eventType = event->type();
 
@@ -88,7 +101,7 @@ bool EnventProxy::eventFilter(QObject* obj, QEvent* event)
 		}
 		else	// 鼠标已按下
 		{
-		
+
 			QRect geo = m_proxyWidget->geometry();
 
 			if (m_regionPressed == Inner)
@@ -185,12 +198,33 @@ bool EnventProxy::eventFilter(QObject* obj, QEvent* event)
 	return QObject::eventFilter(obj, event);
 }
 
+bool EnventProxy::minFilter(QObject * obj, QEvent * event)
+{
+	qDebug() << "btn_min" << endl;
+	QEvent::Type eventType = event->type();
+	QPushButton *bt = (QPushButton*)obj;
+	if (eventType == QEvent::MouseMove) 
+		bt->setStyleSheet("background-color: rgb(255, 170, 0)");
+	else if(eventType == QEvent::Leave)
+		bt->setStyleSheet("border-image: url(:/Resources/png/minimizeHovered.png)");
+	else if (eventType == QEvent::MouseButtonPress) {}
+		//bt->setStyleSheet("background-color: rgb(255, 170, 0)");
+	else if (eventType == QEvent::MouseButtonRelease)
+	{
+		bt->setStyleSheet("border-image: url(:/Resources/png/minimizeHovered.png)");
+		m_proxyWidget->showMinimized();
+	}
+	return false;
+}
+
+//停止监控鼠标->变化样式
 void EnventProxy::StartCursorTimer()
 {
 	StopCursorTimer();
 	m_cursorTimerId = m_proxyWidget->startTimer(50);
 }
 
+//停止监控鼠标->停止变化样式
 void EnventProxy::StopCursorTimer()
 {
 	if (m_cursorTimerId != 0)
@@ -200,6 +234,7 @@ void EnventProxy::StopCursorTimer()
 	}
 }
 
+//算出当前窗体九宫格每个格子的rect
 void EnventProxy::MakeRegions()
 {
 	int width = m_proxyWidget->width();

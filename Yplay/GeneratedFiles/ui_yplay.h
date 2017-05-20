@@ -30,21 +30,21 @@ class Ui_YplayClass
 public:
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout;
-    QHBoxLayout *horizontalLayout;
-    QPushButton *pushButton_4;
+    QHBoxLayout *menu_layout;
+    QPushButton *btn_open;
     QSpacerItem *horizontalSpacer;
-    QPushButton *pushButton_3;
-    QPushButton *pushButton_2;
-    QPushButton *pushButton;
-    QOpenGLWidget *openGLWidget;
-    QSlider *horizontalSlider;
-    QHBoxLayout *horizontalLayout_2;
-    QPushButton *pushButton_8;
-    QPushButton *pushButton_7;
-    QPushButton *pushButton_6;
+    QPushButton *btn_min;
+    QPushButton *btn_max;
+    QPushButton *btn_exit;
+    QOpenGLWidget *openGL_video;
+    QSlider *bar_schedule;
+    QHBoxLayout *control_layout;
+    QPushButton *btn_play;
+    QPushButton *btn_backward;
+    QPushButton *btn_forward;
     QSpacerItem *horizontalSpacer_2;
-    QPushButton *pushButton_5;
-    QSlider *horizontalSlider_2;
+    QPushButton *btn_volume;
+    QSlider *bar_volume;
 
     void setupUi(QMainWindow *YplayClass)
     {
@@ -55,55 +55,61 @@ public:
         centralWidget = new QWidget(YplayClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         centralWidget->setMouseTracking(true);
+        centralWidget->setStyleSheet(QStringLiteral("background-color: rgb(127, 119, 125);"));
         verticalLayout = new QVBoxLayout(centralWidget);
         verticalLayout->setSpacing(0);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
-        horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setSpacing(6);
-        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        horizontalLayout->setContentsMargins(1, 1, -1, -1);
-        pushButton_4 = new QPushButton(centralWidget);
-        pushButton_4->setObjectName(QStringLiteral("pushButton_4"));
-        pushButton_4->setMaximumSize(QSize(33, 22));
+        menu_layout = new QHBoxLayout();
+        menu_layout->setSpacing(6);
+        menu_layout->setObjectName(QStringLiteral("menu_layout"));
+        menu_layout->setContentsMargins(1, 1, -1, 2);
+        btn_open = new QPushButton(centralWidget);
+        btn_open->setObjectName(QStringLiteral("btn_open"));
+        btn_open->setMaximumSize(QSize(33, 22));
 
-        horizontalLayout->addWidget(pushButton_4);
+        menu_layout->addWidget(btn_open);
 
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        horizontalLayout->addItem(horizontalSpacer);
+        menu_layout->addItem(horizontalSpacer);
 
-        pushButton_3 = new QPushButton(centralWidget);
-        pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
-        pushButton_3->setMaximumSize(QSize(33, 22));
+        btn_min = new QPushButton(centralWidget);
+        btn_min->setObjectName(QStringLiteral("btn_min"));
+        btn_min->setMaximumSize(QSize(33, 22));
+        btn_min->setStyleSheet(QLatin1String("border-image: url(:/Resources/png/minimizeHovered.png);\n"
+""));
 
-        horizontalLayout->addWidget(pushButton_3);
+        menu_layout->addWidget(btn_min);
 
-        pushButton_2 = new QPushButton(centralWidget);
-        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
-        pushButton_2->setMaximumSize(QSize(33, 22));
+        btn_max = new QPushButton(centralWidget);
+        btn_max->setObjectName(QStringLiteral("btn_max"));
+        btn_max->setMaximumSize(QSize(33, 22));
+        btn_max->setStyleSheet(QLatin1String("border-image: url(:/Resources/png/maximizeHovered.png);\n"
+""));
 
-        horizontalLayout->addWidget(pushButton_2);
+        menu_layout->addWidget(btn_max);
 
-        pushButton = new QPushButton(centralWidget);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setMaximumSize(QSize(33, 22));
+        btn_exit = new QPushButton(centralWidget);
+        btn_exit->setObjectName(QStringLiteral("btn_exit"));
+        btn_exit->setMaximumSize(QSize(33, 22));
+        btn_exit->setStyleSheet(QStringLiteral("border-image: url(:/Resources/png/closeHovered.png);"));
 
-        horizontalLayout->addWidget(pushButton);
+        menu_layout->addWidget(btn_exit);
 
 
-        verticalLayout->addLayout(horizontalLayout);
+        verticalLayout->addLayout(menu_layout);
 
-        openGLWidget = new QOpenGLWidget(centralWidget);
-        openGLWidget->setObjectName(QStringLiteral("openGLWidget"));
-        openGLWidget->setMouseTracking(true);
+        openGL_video = new QOpenGLWidget(centralWidget);
+        openGL_video->setObjectName(QStringLiteral("openGL_video"));
+        openGL_video->setMouseTracking(true);
 
-        verticalLayout->addWidget(openGLWidget);
+        verticalLayout->addWidget(openGL_video);
 
-        horizontalSlider = new QSlider(centralWidget);
-        horizontalSlider->setObjectName(QStringLiteral("horizontalSlider"));
-        horizontalSlider->setStyleSheet(QLatin1String("QSlider{background-color:rgb(0,0,0)}\n"
+        bar_schedule = new QSlider(centralWidget);
+        bar_schedule->setObjectName(QStringLiteral("bar_schedule"));
+        bar_schedule->setStyleSheet(QLatin1String("QSlider{background-color:rgb(0,0,0)}\n"
 "\n"
 "QSlider::add-page:horizontal{background-color: rgb(87, 97, 106);  height:4px; }\n"
 "QSlider::sub-page:horizontal {background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(231,80,229, 255), stop:1 rgba(7,208,255, 255));height:4px;}\n"
@@ -114,51 +120,61 @@ public:
 "QSlider::handle:horizontal {margin-top:-2px; margin-bottom:-2px;border-radius:4px;  background: rgb(222,222,222); width:14px; height:18px;}\n"
 "\n"
 "QSlider::groove:horizontal {background:transparent;height:4px}QSlider::groove:hover:horizontal {background:transparent;height:6px}"));
-        horizontalSlider->setOrientation(Qt::Horizontal);
+        bar_schedule->setOrientation(Qt::Horizontal);
 
-        verticalLayout->addWidget(horizontalSlider);
+        verticalLayout->addWidget(bar_schedule);
 
-        horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setSpacing(0);
-        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
-        horizontalLayout_2->setContentsMargins(1, 1, -1, -1);
-        pushButton_8 = new QPushButton(centralWidget);
-        pushButton_8->setObjectName(QStringLiteral("pushButton_8"));
-        pushButton_8->setMaximumSize(QSize(30, 23));
+        control_layout = new QHBoxLayout();
+        control_layout->setSpacing(0);
+        control_layout->setObjectName(QStringLiteral("control_layout"));
+        control_layout->setContentsMargins(1, 1, 1, -1);
+        btn_play = new QPushButton(centralWidget);
+        btn_play->setObjectName(QStringLiteral("btn_play"));
+        btn_play->setMaximumSize(QSize(30, 23));
+        btn_play->setStyleSheet(QStringLiteral(""));
 
-        horizontalLayout_2->addWidget(pushButton_8);
+        control_layout->addWidget(btn_play);
 
-        pushButton_7 = new QPushButton(centralWidget);
-        pushButton_7->setObjectName(QStringLiteral("pushButton_7"));
-        pushButton_7->setMaximumSize(QSize(30, 23));
+        btn_backward = new QPushButton(centralWidget);
+        btn_backward->setObjectName(QStringLiteral("btn_backward"));
+        btn_backward->setMaximumSize(QSize(30, 23));
+        btn_backward->setStyleSheet(QStringLiteral(""));
 
-        horizontalLayout_2->addWidget(pushButton_7);
+        control_layout->addWidget(btn_backward);
 
-        pushButton_6 = new QPushButton(centralWidget);
-        pushButton_6->setObjectName(QStringLiteral("pushButton_6"));
-        pushButton_6->setMaximumSize(QSize(30, 23));
+        btn_forward = new QPushButton(centralWidget);
+        btn_forward->setObjectName(QStringLiteral("btn_forward"));
+        btn_forward->setMaximumSize(QSize(30, 23));
+        btn_forward->setStyleSheet(QStringLiteral(""));
 
-        horizontalLayout_2->addWidget(pushButton_6);
+        control_layout->addWidget(btn_forward);
 
         horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        horizontalLayout_2->addItem(horizontalSpacer_2);
+        control_layout->addItem(horizontalSpacer_2);
 
-        pushButton_5 = new QPushButton(centralWidget);
-        pushButton_5->setObjectName(QStringLiteral("pushButton_5"));
-        pushButton_5->setMaximumSize(QSize(23, 23));
+        btn_volume = new QPushButton(centralWidget);
+        btn_volume->setObjectName(QStringLiteral("btn_volume"));
+        QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(btn_volume->sizePolicy().hasHeightForWidth());
+        btn_volume->setSizePolicy(sizePolicy);
+        btn_volume->setMaximumSize(QSize(23, 23));
+        btn_volume->setStyleSheet(QStringLiteral(""));
 
-        horizontalLayout_2->addWidget(pushButton_5);
+        control_layout->addWidget(btn_volume);
 
-        horizontalSlider_2 = new QSlider(centralWidget);
-        horizontalSlider_2->setObjectName(QStringLiteral("horizontalSlider_2"));
-        horizontalSlider_2->setMaximumSize(QSize(200, 23));
-        horizontalSlider_2->setOrientation(Qt::Horizontal);
+        bar_volume = new QSlider(centralWidget);
+        bar_volume->setObjectName(QStringLiteral("bar_volume"));
+        bar_volume->setMaximumSize(QSize(200, 23));
+        bar_volume->setStyleSheet(QStringLiteral(""));
+        bar_volume->setOrientation(Qt::Horizontal);
 
-        horizontalLayout_2->addWidget(horizontalSlider_2);
+        control_layout->addWidget(bar_volume);
 
 
-        verticalLayout->addLayout(horizontalLayout_2);
+        verticalLayout->addLayout(control_layout);
 
         YplayClass->setCentralWidget(centralWidget);
 
@@ -170,14 +186,14 @@ public:
     void retranslateUi(QMainWindow *YplayClass)
     {
         YplayClass->setWindowTitle(QApplication::translate("YplayClass", "Yplay", 0));
-        pushButton_4->setText(QApplication::translate("YplayClass", "\346\211\223\345\274\200", 0));
-        pushButton_3->setText(QString());
-        pushButton_2->setText(QString());
-        pushButton->setText(QString());
-        pushButton_8->setText(QApplication::translate("YplayClass", "\346\222\255\346\224\276", 0));
-        pushButton_7->setText(QApplication::translate("YplayClass", "\345\233\236\351\200\200", 0));
-        pushButton_6->setText(QApplication::translate("YplayClass", "\345\277\253\350\277\233", 0));
-        pushButton_5->setText(QApplication::translate("YplayClass", "PushButton", 0));
+        btn_open->setText(QApplication::translate("YplayClass", "\346\211\223\345\274\200", 0));
+        btn_min->setText(QString());
+        btn_max->setText(QString());
+        btn_exit->setText(QString());
+        btn_play->setText(QApplication::translate("YplayClass", "\346\222\255\346\224\276", 0));
+        btn_backward->setText(QApplication::translate("YplayClass", "\345\233\236\351\200\200", 0));
+        btn_forward->setText(QApplication::translate("YplayClass", "\345\277\253\350\277\233", 0));
+        btn_volume->setText(QString());
     } // retranslateUi
 
 };
