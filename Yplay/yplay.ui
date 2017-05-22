@@ -42,24 +42,73 @@
     <item>
      <layout class="QHBoxLayout" name="menu_layout">
       <property name="leftMargin">
-       <number>1</number>
+       <number>9</number>
       </property>
       <property name="topMargin">
-       <number>1</number>
+       <number>5</number>
+      </property>
+      <property name="rightMargin">
+       <number>9</number>
       </property>
       <property name="bottomMargin">
-       <number>2</number>
+       <number>5</number>
       </property>
       <item>
-       <widget class="QPushButton" name="btn_open">
-        <property name="maximumSize">
+       <widget class="QLabel" name="lable_ico">
+        <property name="minimumSize">
          <size>
-          <width>33</width>
-          <height>22</height>
+          <width>50</width>
+          <height>50</height>
          </size>
         </property>
+        <property name="maximumSize">
+         <size>
+          <width>50</width>
+          <height>50</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border-image: url(:/Resources/png/ico.png);</string>
+        </property>
         <property name="text">
-         <string>打开</string>
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btn_open">
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton{
+image:url(:/Resources/png/filord.png);
+  color: white; 
+  border-radius: 10px; 
+ border: 2px groove gray;
+  border-style: outset;
+}
+
+QPushButton:hover{
+background-color:white;
+ color: black;
+}
+
+QPushButton:pressed{
+border-style: inset;} 
+</string>
+        </property>
+        <property name="text">
+         <string/>
         </property>
        </widget>
       </item>
@@ -78,14 +127,34 @@
       </item>
       <item>
        <widget class="QPushButton" name="btn_min">
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
         <property name="maximumSize">
          <size>
-          <width>33</width>
-          <height>22</height>
+          <width>30</width>
+          <height>30</height>
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">border-image: url(:/Resources/png/minimizeHovered.png);
+         <string notr="true">QPushButton{
+image:url(:/Resources/png/min.png);
+  color: white; 
+  border-radius: 10px; 
+ border: 2px groove gray;
+  border-style: outset;
+}
+
+QPushButton:hover{
+background-color:white;
+ color: black;
+}
+
+QPushButton:pressed{
+border-style: inset;} 
 </string>
         </property>
         <property name="text">
@@ -95,14 +164,28 @@
       </item>
       <item>
        <widget class="QPushButton" name="btn_max">
-        <property name="maximumSize">
+        <property name="minimumSize">
          <size>
-          <width>33</width>
-          <height>22</height>
+          <width>30</width>
+          <height>30</height>
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">border-image: url(:/Resources/png/maximizeHovered.png);
+         <string notr="true">QPushButton{
+image:url(:/Resources/png/max.png);
+  color: white; 
+  border-radius: 10px; 
+ border: 2px groove gray;
+  border-style: outset;
+}
+
+QPushButton:hover{
+background-color:white;
+ color: black;
+}
+
+QPushButton:pressed{
+border-style: inset;} 
 </string>
         </property>
         <property name="text">
@@ -112,14 +195,35 @@
       </item>
       <item>
        <widget class="QPushButton" name="btn_exit">
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
         <property name="maximumSize">
          <size>
-          <width>33</width>
-          <height>22</height>
+          <width>30</width>
+          <height>30</height>
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">border-image: url(:/Resources/png/closeHovered.png);</string>
+         <string notr="true">QPushButton{
+image:url(:/Resources/png/exit.png);
+  color: white; 
+  border-radius: 10px; 
+ border: 2px groove gray;
+  border-style: outset;
+}
+
+QPushButton:hover{
+background-color:white;
+ color: black;
+}
+
+QPushButton:pressed{
+border-style: inset;} 
+</string>
         </property>
         <property name="text">
          <string/>
@@ -158,62 +262,99 @@ QSlider::groove:horizontal {background:transparent;height:4px}QSlider::groove:ho
     <item>
      <layout class="QHBoxLayout" name="control_layout">
       <property name="spacing">
-       <number>0</number>
+       <number>4</number>
       </property>
       <property name="leftMargin">
-       <number>1</number>
+       <number>9</number>
       </property>
       <property name="topMargin">
-       <number>1</number>
+       <number>5</number>
       </property>
       <property name="rightMargin">
-       <number>1</number>
+       <number>9</number>
+      </property>
+      <property name="bottomMargin">
+       <number>5</number>
       </property>
       <item>
-       <widget class="QPushButton" name="btn_play">
+       <widget class="QPushButton" name="btn_backward">
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
         <property name="maximumSize">
          <size>
           <width>30</width>
-          <height>23</height>
+          <height>30</height>
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true"/>
+         <string notr="true">
+QPushButton{
+image:url(:/Resources/png/back.png);
+  color: white; 
+  border-radius: 10px; 
+ border: 2px groove gray;
+  border-style: outset;
+}
+
+QPushButton:hover{
+background-color:white;
+ color: black;
+}
+
+QPushButton:pressed{
+border-style: inset;} 
+</string>
         </property>
         <property name="text">
-         <string>播放</string>
+         <string/>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="btn_backward">
+       <widget class="QPushButton" name="btn_play">
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
         <property name="maximumSize">
          <size>
           <width>30</width>
-          <height>23</height>
+          <height>30</height>
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true"/>
+         <string notr="true">border-image: url(:/Resources/png/play_1.png);</string>
         </property>
         <property name="text">
-         <string>回退</string>
+         <string/>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="btn_forward">
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
         <property name="maximumSize">
          <size>
           <width>30</width>
-          <height>23</height>
+          <height>30</height>
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true"/>
+         <string notr="true">border-image: url(:/Resources/png/forward.png);</string>
         </property>
         <property name="text">
-         <string>快进</string>
+         <string/>
         </property>
        </widget>
       </item>
@@ -231,6 +372,28 @@ QSlider::groove:horizontal {background:transparent;height:4px}QSlider::groove:ho
        </spacer>
       </item>
       <item>
+       <widget class="QPushButton" name="pushButton">
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border-image: url(:/Resources/png/set.png);</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="btn_volume">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -238,14 +401,20 @@ QSlider::groove:horizontal {background:transparent;height:4px}QSlider::groove:ho
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
         <property name="maximumSize">
          <size>
-          <width>23</width>
-          <height>23</height>
+          <width>30</width>
+          <height>30</height>
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">
+         <string notr="true">border-image: url(:/Resources/png/volum_1.png);
 </string>
         </property>
         <property name="text">
@@ -257,7 +426,7 @@ QSlider::groove:horizontal {background:transparent;height:4px}QSlider::groove:ho
        <widget class="QSlider" name="bar_volume">
         <property name="maximumSize">
          <size>
-          <width>200</width>
+          <width>150</width>
           <height>23</height>
          </size>
         </property>
@@ -278,5 +447,25 @@ QSlider::groove:horizontal {background:transparent;height:4px}QSlider::groove:ho
  <resources>
   <include location="yplay.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>btn_open</sender>
+   <signal>clicked()</signal>
+   <receiver>YplayClass</receiver>
+   <slot>btn_openFile_click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>79</x>
+     <y>62</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>299</x>
+     <y>199</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>btn_openFile_click()</slot>
+ </slots>
 </ui>

@@ -55,7 +55,15 @@ bool EnventProxy::eventFilter(QObject* obj, QEvent* event)
 	{
 		return minFilter(obj, event);
 	}
+	else if ("btn_max" == obj->objectName())
+	{
+		return maxFilter(obj, event);
 
+	}
+	else if ("btn_exit" == obj->objectName())
+	{
+		return exitFilter(obj, event);
+	}
 
 
 }
@@ -200,21 +208,64 @@ bool EnventProxy::windFilter(QObject * obj, QEvent * event)
 
 bool EnventProxy::minFilter(QObject * obj, QEvent * event)
 {
+	bool bRet = false;
 	qDebug() << "btn_min" << endl;
 	QEvent::Type eventType = event->type();
 	QPushButton *bt = (QPushButton*)obj;
-	if (eventType == QEvent::MouseMove) 
-		bt->setStyleSheet("background-color: rgb(255, 170, 0)");
-	else if(eventType == QEvent::Leave)
-		bt->setStyleSheet("border-image: url(:/Resources/png/minimizeHovered.png)");
-	else if (eventType == QEvent::MouseButtonPress) {}
-		//bt->setStyleSheet("background-color: rgb(255, 170, 0)");
-	else if (eventType == QEvent::MouseButtonRelease)
+	
+	if (eventType == QEvent::MouseButtonRelease)
 	{
-		bt->setStyleSheet("border-image: url(:/Resources/png/minimizeHovered.png)");
+	
 		m_proxyWidget->showMinimized();
+		bRet = false;
 	}
-	return false;
+	return bRet;
+}
+
+bool EnventProxy::maxFilter(QObject * obj, QEvent * event)
+{
+	bool bRet = false;
+	qDebug() << "btn_max" << endl;
+	QEvent::Type eventType = event->type();
+	QPushButton *bt = (QPushButton*)obj;
+
+	if (eventType == QEvent::MouseButtonRelease)
+	{
+
+		if (!m_proxyWidget->isMaximized())
+			m_proxyWidget->showMaximized();
+		else
+		{
+			m_proxyWidget->showNormal();
+		}
+		bRet = false;
+	}
+	return bRet;
+}
+
+bool EnventProxy::exitFilter(QObject * obj, QEvent * event)
+{
+	bool bRet = false;
+	qDebug() << "btn_max" << endl;
+	QEvent::Type eventType = event->type();
+	QPushButton *bt = (QPushButton*)obj;
+
+	if (eventType == QEvent::MouseButtonRelease)
+	{
+		
+		int pointX = m_proxyWidget->pos().x();
+		int pointY = m_proxyWidget->pos().y();
+		int temp = m_proxyWidget->height();
+		for (int i = 0; i < m_proxyWidget->height() / 2; ++i)
+		{
+			pointY += 10;
+			temp -= 20;
+			m_proxyWidget->setGeometry(pointX, pointY, m_proxyWidget->width(), temp);
+		}
+		m_proxyWidget->close();
+		bRet = false;
+	}
+	return bRet;
 }
 
 //停止监控鼠标->变化样式

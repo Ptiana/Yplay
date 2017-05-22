@@ -25,6 +25,9 @@ protected:
 	virtual bool eventFilter(QObject* obj, QEvent* event);  //事件筛选
 	bool windFilter(QObject* obj, QEvent* event);           //代理窗体事件
 	bool minFilter(QObject* obj, QEvent* event);            //最小化按钮事件
+	bool maxFilter(QObject* obj, QEvent* event);            //最大化按钮事件
+	bool exitFilter(QObject* obj, QEvent* event);           //退出按钮事件
+
 	void MakeRegions();                                     //算出当前窗体九宫格每个格子的rect
 	WidgetRegion HitTest(const QPoint& pos);                //计算当前焦点在哪个区域
 	void UpdateGeometry(int x, int y, int w, int h);        //更新主窗体位置
