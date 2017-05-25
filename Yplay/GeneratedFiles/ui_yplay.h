@@ -17,7 +17,6 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QOpenGLWidget>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSlider>
 #include <QtWidgets/QSpacerItem>
@@ -38,7 +37,7 @@ public:
     QPushButton *btn_min;
     QPushButton *btn_max;
     QPushButton *btn_exit;
-    QOpenGLWidget *openGL_video;
+    QLabel *lbl_play;
     QSlider *bar_schedule;
     QHBoxLayout *control_layout;
     QPushButton *btn_backward;
@@ -174,11 +173,11 @@ public:
 
         verticalLayout->addLayout(menu_layout);
 
-        openGL_video = new QOpenGLWidget(centralWidget);
-        openGL_video->setObjectName(QStringLiteral("openGL_video"));
-        openGL_video->setMouseTracking(true);
+        lbl_play = new QLabel(centralWidget);
+        lbl_play->setObjectName(QStringLiteral("lbl_play"));
+        lbl_play->setStyleSheet(QStringLiteral("background-color: rgb(0, 0, 0);"));
 
-        verticalLayout->addWidget(openGL_video);
+        verticalLayout->addWidget(lbl_play);
 
         bar_schedule = new QSlider(centralWidget);
         bar_schedule->setObjectName(QStringLiteral("bar_schedule"));
@@ -229,7 +228,22 @@ public:
         btn_play->setObjectName(QStringLiteral("btn_play"));
         btn_play->setMinimumSize(QSize(30, 30));
         btn_play->setMaximumSize(QSize(30, 30));
-        btn_play->setStyleSheet(QStringLiteral("border-image: url(:/Resources/png/play_1.png);"));
+        btn_play->setStyleSheet(QLatin1String("\n"
+"QPushButton{\n"
+"image:url(:/Resources/png/play_1.png);\n"
+"  color: white; \n"
+"  border-radius: 10px; \n"
+" border: 2px groove gray;\n"
+"  border-style: outset;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"background-color:white;\n"
+" color: black;\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"border-style: inset;} "));
 
         control_layout->addWidget(btn_play);
 
@@ -282,6 +296,7 @@ public:
 
         retranslateUi(YplayClass);
         QObject::connect(btn_open, SIGNAL(clicked()), YplayClass, SLOT(btn_openFile_click()));
+        QObject::connect(btn_play, SIGNAL(clicked()), YplayClass, SLOT(btn_playVideo_click()));
 
         QMetaObject::connectSlotsByName(YplayClass);
     } // setupUi
@@ -294,6 +309,7 @@ public:
         btn_min->setText(QString());
         btn_max->setText(QString());
         btn_exit->setText(QString());
+        lbl_play->setText(QString());
         btn_backward->setText(QString());
         btn_play->setText(QString());
         btn_forward->setText(QString());

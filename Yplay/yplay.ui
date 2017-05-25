@@ -233,9 +233,12 @@ border-style: inset;}
      </layout>
     </item>
     <item>
-     <widget class="QOpenGLWidget" name="openGL_video">
-      <property name="mouseTracking">
-       <bool>true</bool>
+     <widget class="QLabel" name="lbl_play">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(0, 0, 0);</string>
+      </property>
+      <property name="text">
+       <string/>
       </property>
      </widget>
     </item>
@@ -329,7 +332,22 @@ border-style: inset;}
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">border-image: url(:/Resources/png/play_1.png);</string>
+         <string notr="true">
+QPushButton{
+image:url(:/Resources/png/play_1.png);
+  color: white; 
+  border-radius: 10px; 
+ border: 2px groove gray;
+  border-style: outset;
+}
+
+QPushButton:hover{
+background-color:white;
+ color: black;
+}
+
+QPushButton:pressed{
+border-style: inset;} </string>
         </property>
         <property name="text">
          <string/>
@@ -464,8 +482,25 @@ border-style: inset;}
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>btn_play</sender>
+   <signal>clicked()</signal>
+   <receiver>YplayClass</receiver>
+   <slot>btn_playVideo_click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>57</x>
+     <y>336</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>299</x>
+     <y>199</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>btn_openFile_click()</slot>
+  <slot>btn_playVideo_click()</slot>
  </slots>
 </ui>

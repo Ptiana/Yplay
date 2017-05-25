@@ -65,7 +65,7 @@ bool EnventProxy::eventFilter(QObject* obj, QEvent* event)
 		return exitFilter(obj, event);
 	}
 
-
+	return false;
 }
 
 bool EnventProxy::windFilter(QObject * obj, QEvent * event)
