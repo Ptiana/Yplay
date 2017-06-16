@@ -1,17 +1,18 @@
 <RCC>
     <qresource prefix="/">
-        <file>Resources/png/play_1.png</file>
-        <file>Resources/png/play_2.png</file>
-        <file>Resources/png/volum_1.png</file>
-        <file>Resources/png/volum_2.png</file>
-        <file>Resources/png/back.png</file>
-        <file>Resources/png/forward.png</file>
-        <file>Resources/png/set.png</file>
         <file>Resources/png/exit.png</file>
         <file>Resources/png/max.png</file>
         <file>Resources/png/min.png</file>
         <file>Resources/png/open.png</file>
         <file>Resources/png/filord.png</file>
-        <file>Resources/png/ico.png</file>
+        <file>Resources/png/menu.png</file>
+        <file>Resources/png/pause.png</file>
+        <file>Resources/png/play.png</file>
+        <file>Resources/png/back.png</file>
+        <file>Resources/png/forward.png</file>
+        <file>Resources/png/volum.png</file>
+        <file>Resources/png/volum_max.png</file>
+        <file>Resources/png/volum_midel.png</file>
+        <file>Resources/png/volum_min.png</file>
     </qresource>
 </RCC>

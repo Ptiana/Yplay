@@ -2,69 +2,78 @@
 
 FansubTransalte::FansubTransalte()
 {
-	currentHandleIndex = 0;
-	jumpFrameNum = 3;
-	fansubText = "";
-	tran = NULL;
+	m_currentHandleIndex = 0;
+	m_jumpFrameNum = 3;
+	m_fansubText = "";
+	m_tran = NULL;
 	minFuseResult=Mat(800, 600, CV_32FC1, 1);
-	end = false;
+	
+	
+	
 }
 
 FansubTransalte::~FansubTransalte()
 {
+
 }
 
 void FansubTransalte::run()
 {
-	tran = new Translate();
-	tran->setUser("20161115000031816", "WHl5ZGViIWzYoJXMiC5_");
+	cout << "重新开始";
+	end = false;
+	//初始化翻译实例
+	m_tran = new Translate();
+	m_tran->setUser("20161115000031816", "WHl5ZGViIWzYoJXMiC5_");
 	//50秒检查一次视频是否已经打开
-	while (!videoHandleCheck())
-	{
-		sleep(10);
-	}
 	while (!end)
 	{
-		if (progressBarVary)
-		{
-			resultFrame.clear();
-			fansubFuseFrame.clear();
-			readFrame.clear();
-		}
-		if (resultFrame.size() < 60)
+		if (g_resultFrame.size() < 60)
 		{
 			//处理字幕
-			fansubHandle(currentHandleIndex);
+			fansubHandle();
 			continue;
 		}
 		waitKey(2);
 	}
-	
-	system("pause");
+	g_resultFrame.clear();
+	fansubFuseFrame.clear();
+	readFrame.clear();
+	delete m_tran;
+	cout << "线程退出";
 
  }
+void FansubTransalte::stop()
+{
+	end = true;
+}
+
+
+void FansubTransalte::scheduelChange(int value)
+{
+	m_currentHandleIndex = value;
+}
 
 
 
-void FansubTransalte::fansubHandle(int starFrame)
+void FansubTransalte::fansubHandle()
 {
 	//处理新字幕前的初始化
-	fansubText = "";
-	newVideo.set(CV_CAP_PROP_POS_FRAMES, starFrame);
+	m_fansubText = "";
+	newVideo.set(CV_CAP_PROP_POS_FRAMES, m_currentHandleIndex);
 	//字幕追踪
-	while (!FansubTrack());
+	while (!end && !FansubTrack()) {};
 	if (!end)
 	{
 		//字幕帧融合
 		minValueFuse(fansubFuseFrame, minFuseResult);
 		//字幕切割并识别
 		fansubCut();
-		qDebug() << "11111";
-		QString textTranslation = tran->textTranslate(fansubText, "en", "zh");
-		loadTranslation(readFrame.size() - fansubFuseFrame.size() * 3 + 1, readFrame.size() - 1, textTranslation);
+		//qDebug() << "11111";
+		QString textTranslation = m_tran->textTranslate(m_fansubText, "en", "zh");
+		loadTranslation(readFrame.size() - fansubFuseFrame.size() * m_jumpFrameNum + 1, readFrame.size() - 1, textTranslation);
 		writeToShareSpace(readFrame);
 		qDebug() << textTranslation;
-		currentHandleIndex += readFrame.size();
+		m_currentHandleIndex += readFrame.size();
 		/*vector<Mat>().swap(readFrame);
 		vector<Mat>().swap(fansubFuseFrame);*/
 		//readFrame.clear();
@@ -126,6 +135,7 @@ bool  FansubTransalte::FansubTrack()
 			{
 				//qDebug() << "5678";
 				//vector<Mat>().swap(fansubFuseFrame);
+
 				break;
 			}
 			else                           //检测到字幕结束停止追踪
@@ -169,7 +179,7 @@ void FansubTransalte::fansubCut()
 		//从最小值平均图中获取字幕精确位置再使用大津法可以为单个字符分割提供更好的条件
 		cv::threshold(temp, temp, 200, 255, CV_THRESH_BINARY | CV_THRESH_OTSU);
 		//单个切割
-		charCutDistinguish(temp, fansubText);
+		charCutDistinguish(temp, m_fansubText);
 		
 	}
 }
@@ -368,9 +378,12 @@ void FansubTransalte::writeToShareSpace(vector<Mat>src)
 {
 	for (size_t i = 0; i < src.size(); i++)
 	{
-		resultFrame.push_back(src[i].clone());
+
+		g_resultFrame.push_back(src[i].clone());
+
+
 	}
-	dealFansubNum += src.size();
+
 }
 
 
@@ -379,7 +392,7 @@ bool FansubTransalte::getNextfarme(Mat& src_frame)
 {
 	Mat currentFarme;
 	bool ret = true;
-	for (int i = 0; i < jumpFrameNum; i++)
+	for (int i = 0; i < m_jumpFrameNum; i++)
 	{
 		newVideo >> currentFarme;
 		readFrame.push_back(currentFarme.clone());
@@ -400,16 +413,16 @@ bool FansubTransalte::getNextfarme(Mat& src_frame)
 	return ret;
 }
 
-bool FansubTransalte::videoHandleCheck()
+bool FansubTransalte::videoOpen(QString filePath,int &timeStamp, long &sumNum)
 {
 	bool ret = false;
 	do
 	{
-		qDebug() << "1 ";
-		if (!existVideo)
-			break;
 		newVideo = VideoCapture(filePath.toStdString());
-		frameRate = newVideo.get(CV_CAP_PROP_FPS);
+		if(!newVideo.isOpened())
+			break;
+		timeStamp =1000/newVideo.get(CV_CAP_PROP_FPS);
+		sumNum = newVideo.get(CV_CAP_PROP_FRAME_COUNT);
 		ret = true;
 	} while (false);
 	return ret;

@@ -8,22 +8,25 @@
 #include <QThread>
 using namespace std;
 using namespace cv;
-extern bool existVideo;
-extern QString filePath;
-extern int currentHandleIndex;
 extern bool progressBarVary;
-extern list<Mat>resultFrame;
-extern int dealFansubNum;
-extern int frameRate;
+
+extern QMutex g_mutex;
+extern list<Mat>g_resultFrame;
+
+
+
 class FansubTransalte:public QThread
 {
 	Q_OBJECT
 public:
 	FansubTransalte();
 	~FansubTransalte();
+	//打开视频文件并获取视频文件的帧时间戳和总帧数
+	bool videoOpen(QString filePath, int &timeStamp, long &sumNum);
 	void run();
+	void stop();
 	//处理字幕
-	void fansubHandle(int starFrame);
+	void fansubHandle();
 	//字幕追踪
 	bool  FansubTrack();
 	//跳过接下来的jumpFrameNum帧取第4帧
@@ -41,26 +44,27 @@ public:
 	void loadTranslation(int star, int end, QString txt);
 	//将处理好的数据写入共享内存
 	void writeToShareSpace(vector<Mat>src);
-private slots:
-	//检查是否已经成功打开了视频文件
-	bool videoHandleCheck();
+
+    void scheduelChange(int value);//修改播放进度
 private:
-	bool end;
+	//当前要处理的帧在视频所有帧中的索引
+	int m_currentHandleIndex;
+	volatile  bool end;
 	//打开的视频
 	VideoCapture newVideo;
-
 	//要进行字幕融合处理的帧
 	vector<Mat>fansubFuseFrame;
 	//已经读入的帧
 	vector<Mat>readFrame;
 	//表示每次跳几帧选一帧处理
-	int jumpFrameNum;
+	int m_jumpFrameNum;
 	//字幕最小值融合结果
 	Mat minFuseResult;
 
-	QString fansubText;
-	//翻译处理的类
-	Translate *tran;
+	//用于存放翻译之后的字幕
+	QString m_fansubText;
+	//用于翻译处理的类
+	Translate *m_tran;
 
 };
 

@@ -54,28 +54,6 @@
        <number>5</number>
       </property>
       <item>
-       <widget class="QLabel" name="lable_ico">
-        <property name="minimumSize">
-         <size>
-          <width>50</width>
-          <height>50</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>50</width>
-          <height>50</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">border-image: url(:/Resources/png/ico.png);</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QPushButton" name="btn_open">
         <property name="minimumSize">
          <size>
@@ -91,7 +69,7 @@
         </property>
         <property name="styleSheet">
          <string notr="true">QPushButton{
-image:url(:/Resources/png/filord.png);
+image:url(:/Resources/png/menu.png);
   color: white; 
   border-radius: 10px; 
  border: 2px groove gray;
@@ -109,6 +87,24 @@ border-style: inset;}
         </property>
         <property name="text">
          <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="maximumSize">
+         <size>
+          <width>90</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 9pt &quot;Bauhaus 93&quot;;
+color: rgb(170, 170, 127);
+font: 16pt &quot;华文琥珀&quot;;</string>
+        </property>
+        <property name="text">
+         <string>呓语影音</string>
         </property>
        </widget>
       </item>
@@ -234,6 +230,9 @@ border-style: inset;}
     </item>
     <item>
      <widget class="QLabel" name="lbl_play">
+      <property name="mouseTracking">
+       <bool>true</bool>
+      </property>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(0, 0, 0);</string>
       </property>
@@ -334,7 +333,7 @@ border-style: inset;}
         <property name="styleSheet">
          <string notr="true">
 QPushButton{
-image:url(:/Resources/png/play_1.png);
+image:url(:/Resources/png/pause.png);
   color: white; 
   border-radius: 10px; 
  border: 2px groove gray;
@@ -369,7 +368,22 @@ border-style: inset;} </string>
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">border-image: url(:/Resources/png/forward.png);</string>
+         <string notr="true">
+QPushButton{
+image:url(:/Resources/png/forward.png);
+  color: white; 
+  border-radius: 10px; 
+ border: 2px groove gray;
+  border-style: outset;
+}
+
+QPushButton:hover{
+background-color:white;
+ color: black;
+}
+
+QPushButton:pressed{
+border-style: inset;} </string>
         </property>
         <property name="text">
          <string/>
@@ -390,28 +404,6 @@ border-style: inset;} </string>
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton">
-        <property name="minimumSize">
-         <size>
-          <width>30</width>
-          <height>30</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>30</width>
-          <height>30</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">border-image: url(:/Resources/png/set.png);</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QPushButton" name="btn_volume">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -421,19 +413,35 @@ border-style: inset;} </string>
         </property>
         <property name="minimumSize">
          <size>
-          <width>30</width>
-          <height>30</height>
+          <width>20</width>
+          <height>20</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>30</width>
-          <height>30</height>
+          <width>20</width>
+          <height>20</height>
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">border-image: url(:/Resources/png/volum_1.png);
-</string>
+         <string notr="true">
+QPushButton{
+image:url(:/Resources/png/volum_midel.png);
+  color: white; 
+  border-radius: 10px; 
+ border: 2px groove gray;
+  border-style: outset;
+}
+
+QPushButton:hover{
+background-color:white;
+ color: black;
+}
+
+QPushButton:pressed{
+border-style: inset;
+
+} </string>
         </property>
         <property name="text">
          <string/>
@@ -449,7 +457,25 @@ border-style: inset;} </string>
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true"/>
+         <string notr="true">QSlider::groove:horizontal {                               
+     border: 1px solid #999999;                           
+     height: 2px;                                           
+     margin: 0px 0;                                         
+     left: 12px; right: 12px;                               
+ }                                                         
+QSlider::handle:horizontal {                                
+     border: 1px solid #5c5c5c;                             
+ border-image:url(:/Resources/png/volum.png);
+     width: 14px;                                          
+     margin: -7px -7px -7px -7px;                           
+ }                                                          
+                                                            
+QSlider::sub-page:horizontal{                               
+ background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(27, 5, 27, 255), stop:0.25 rgba(99, 20, 102, 255), stop:0.5 rgba(154, 30, 158, 255), stop:1 rgba(173, 57, 176, 255));                      
+}                                                           
+QSlider::add-page:horizontal{                               
+ background-image:url(image/skin2/Toolsicon/volumn.png)   
+}</string>
         </property>
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -473,8 +499,8 @@ border-style: inset;} </string>
    <slot>btn_openFile_click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>79</x>
-     <y>62</y>
+     <x>38</x>
+     <y>77</y>
     </hint>
     <hint type="destinationlabel">
      <x>299</x>
@@ -486,10 +512,42 @@ border-style: inset;} </string>
    <sender>btn_play</sender>
    <signal>clicked()</signal>
    <receiver>YplayClass</receiver>
-   <slot>btn_playVideo_click()</slot>
+   <slot>btn_play_click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>57</x>
+     <x>72</x>
+     <y>351</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>299</x>
+     <y>199</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>bar_volume</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>YplayClass</receiver>
+   <slot>volum_change(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>523</x>
+     <y>336</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>299</x>
+     <y>199</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btn_volume</sender>
+   <signal>clicked()</signal>
+   <receiver>YplayClass</receiver>
+   <slot>btn_volum_click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>426</x>
      <y>336</y>
     </hint>
     <hint type="destinationlabel">
@@ -501,6 +559,9 @@ border-style: inset;} </string>
  </connections>
  <slots>
   <slot>btn_openFile_click()</slot>
-  <slot>btn_playVideo_click()</slot>
+  <slot>btn_play_click()</slot>
+  <slot>volum_change(int)</slot>
+  <slot>btn_volum_click()</slot>
+  <slot>bar_schedule_change(int)</slot>
  </slots>
 </ui>

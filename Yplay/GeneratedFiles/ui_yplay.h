@@ -31,8 +31,8 @@ public:
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *menu_layout;
-    QLabel *lable_ico;
     QPushButton *btn_open;
+    QLabel *label;
     QSpacerItem *horizontalSpacer;
     QPushButton *btn_min;
     QPushButton *btn_max;
@@ -44,7 +44,6 @@ public:
     QPushButton *btn_play;
     QPushButton *btn_forward;
     QSpacerItem *horizontalSpacer_2;
-    QPushButton *pushButton;
     QPushButton *btn_volume;
     QSlider *bar_volume;
 
@@ -67,20 +66,12 @@ public:
         menu_layout->setSpacing(6);
         menu_layout->setObjectName(QStringLiteral("menu_layout"));
         menu_layout->setContentsMargins(9, 5, 9, 5);
-        lable_ico = new QLabel(centralWidget);
-        lable_ico->setObjectName(QStringLiteral("lable_ico"));
-        lable_ico->setMinimumSize(QSize(50, 50));
-        lable_ico->setMaximumSize(QSize(50, 50));
-        lable_ico->setStyleSheet(QStringLiteral("border-image: url(:/Resources/png/ico.png);"));
-
-        menu_layout->addWidget(lable_ico);
-
         btn_open = new QPushButton(centralWidget);
         btn_open->setObjectName(QStringLiteral("btn_open"));
         btn_open->setMinimumSize(QSize(30, 30));
         btn_open->setMaximumSize(QSize(30, 30));
         btn_open->setStyleSheet(QLatin1String("QPushButton{\n"
-"image:url(:/Resources/png/filord.png);\n"
+"image:url(:/Resources/png/menu.png);\n"
 "  color: white; \n"
 "  border-radius: 10px; \n"
 " border: 2px groove gray;\n"
@@ -97,6 +88,15 @@ public:
 ""));
 
         menu_layout->addWidget(btn_open);
+
+        label = new QLabel(centralWidget);
+        label->setObjectName(QStringLiteral("label"));
+        label->setMaximumSize(QSize(90, 30));
+        label->setStyleSheet(QString::fromUtf8("font: 9pt \"Bauhaus 93\";\n"
+"color: rgb(170, 170, 127);\n"
+"font: 16pt \"\345\215\216\346\226\207\347\220\245\347\217\200\";"));
+
+        menu_layout->addWidget(label);
 
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -175,6 +175,7 @@ public:
 
         lbl_play = new QLabel(centralWidget);
         lbl_play->setObjectName(QStringLiteral("lbl_play"));
+        lbl_play->setMouseTracking(true);
         lbl_play->setStyleSheet(QStringLiteral("background-color: rgb(0, 0, 0);"));
 
         verticalLayout->addWidget(lbl_play);
@@ -230,7 +231,7 @@ public:
         btn_play->setMaximumSize(QSize(30, 30));
         btn_play->setStyleSheet(QLatin1String("\n"
 "QPushButton{\n"
-"image:url(:/Resources/png/play_1.png);\n"
+"image:url(:/Resources/png/pause.png);\n"
 "  color: white; \n"
 "  border-radius: 10px; \n"
 " border: 2px groove gray;\n"
@@ -251,21 +252,28 @@ public:
         btn_forward->setObjectName(QStringLiteral("btn_forward"));
         btn_forward->setMinimumSize(QSize(30, 30));
         btn_forward->setMaximumSize(QSize(30, 30));
-        btn_forward->setStyleSheet(QStringLiteral("border-image: url(:/Resources/png/forward.png);"));
+        btn_forward->setStyleSheet(QLatin1String("\n"
+"QPushButton{\n"
+"image:url(:/Resources/png/forward.png);\n"
+"  color: white; \n"
+"  border-radius: 10px; \n"
+" border: 2px groove gray;\n"
+"  border-style: outset;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"background-color:white;\n"
+" color: black;\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"border-style: inset;} "));
 
         control_layout->addWidget(btn_forward);
 
         horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         control_layout->addItem(horizontalSpacer_2);
-
-        pushButton = new QPushButton(centralWidget);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setMinimumSize(QSize(30, 30));
-        pushButton->setMaximumSize(QSize(30, 30));
-        pushButton->setStyleSheet(QStringLiteral("border-image: url(:/Resources/png/set.png);"));
-
-        control_layout->addWidget(pushButton);
 
         btn_volume = new QPushButton(centralWidget);
         btn_volume->setObjectName(QStringLiteral("btn_volume"));
@@ -274,17 +282,52 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(btn_volume->sizePolicy().hasHeightForWidth());
         btn_volume->setSizePolicy(sizePolicy);
-        btn_volume->setMinimumSize(QSize(30, 30));
-        btn_volume->setMaximumSize(QSize(30, 30));
-        btn_volume->setStyleSheet(QLatin1String("border-image: url(:/Resources/png/volum_1.png);\n"
-""));
+        btn_volume->setMinimumSize(QSize(20, 20));
+        btn_volume->setMaximumSize(QSize(20, 20));
+        btn_volume->setStyleSheet(QLatin1String("\n"
+"QPushButton{\n"
+"image:url(:/Resources/png/volum_midel.png);\n"
+"  color: white; \n"
+"  border-radius: 10px; \n"
+" border: 2px groove gray;\n"
+"  border-style: outset;\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"background-color:white;\n"
+" color: black;\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"border-style: inset;\n"
+"\n"
+"} "));
 
         control_layout->addWidget(btn_volume);
 
         bar_volume = new QSlider(centralWidget);
         bar_volume->setObjectName(QStringLiteral("bar_volume"));
         bar_volume->setMaximumSize(QSize(150, 23));
-        bar_volume->setStyleSheet(QStringLiteral(""));
+        bar_volume->setStyleSheet(QLatin1String("QSlider::groove:horizontal {                               \n"
+"     border: 1px solid #999999;                           \n"
+"     height: 2px;                                           \n"
+"     margin: 0px 0;                                         \n"
+"     left: 12px; right: 12px;                               \n"
+" }                                                         \n"
+"QSlider::handle:horizontal {                                \n"
+"     border: 1px solid #5c5c5c;                             \n"
+" border-image:url(:/Resources/png/volum.png);\n"
+"     width: 14px;                                          \n"
+"     margin: -7px -7px -7px -7px;                           \n"
+" }                                                          \n"
+"                                                            \n"
+"QSlider::sub-page:horizontal{                               \n"
+" background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(27, 5, 27, 255), stop:0.25 rgba(99, 20, 102, 255), stop:0."
+                        "5 rgba(154, 30, 158, 255), stop:1 rgba(173, 57, 176, 255));                      \n"
+"}                                                           \n"
+"QSlider::add-page:horizontal{                               \n"
+" background-image:url(image/skin2/Toolsicon/volumn.png)   \n"
+"}"));
         bar_volume->setOrientation(Qt::Horizontal);
 
         control_layout->addWidget(bar_volume);
@@ -296,7 +339,9 @@ public:
 
         retranslateUi(YplayClass);
         QObject::connect(btn_open, SIGNAL(clicked()), YplayClass, SLOT(btn_openFile_click()));
-        QObject::connect(btn_play, SIGNAL(clicked()), YplayClass, SLOT(btn_playVideo_click()));
+        QObject::connect(btn_play, SIGNAL(clicked()), YplayClass, SLOT(btn_play_click()));
+        QObject::connect(bar_volume, SIGNAL(valueChanged(int)), YplayClass, SLOT(volum_change(int)));
+        QObject::connect(btn_volume, SIGNAL(clicked()), YplayClass, SLOT(btn_volum_click()));
 
         QMetaObject::connectSlotsByName(YplayClass);
     } // setupUi
@@ -304,8 +349,8 @@ public:
     void retranslateUi(QMainWindow *YplayClass)
     {
         YplayClass->setWindowTitle(QApplication::translate("YplayClass", "Yplay", 0));
-        lable_ico->setText(QString());
         btn_open->setText(QString());
+        label->setText(QApplication::translate("YplayClass", "\345\221\223\350\257\255\345\275\261\351\237\263", 0));
         btn_min->setText(QString());
         btn_max->setText(QString());
         btn_exit->setText(QString());
@@ -313,7 +358,6 @@ public:
         btn_backward->setText(QString());
         btn_play->setText(QString());
         btn_forward->setText(QString());
-        pushButton->setText(QString());
         btn_volume->setText(QString());
     } // retranslateUi
 
