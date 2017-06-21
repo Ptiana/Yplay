@@ -20,6 +20,7 @@ FansubTransalte::~FansubTransalte()
 void FansubTransalte::run()
 {
 	cout << "重新开始";
+	g_resultFrame.clear();
 	end = false;
 	//初始化翻译实例
 	m_tran = new Translate();
@@ -35,7 +36,7 @@ void FansubTransalte::run()
 		}
 		waitKey(2);
 	}
-	g_resultFrame.clear();
+	
 	fansubFuseFrame.clear();
 	readFrame.clear();
 	delete m_tran;
